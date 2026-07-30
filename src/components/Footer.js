@@ -4,7 +4,6 @@ import { settings } from "@/lib/data";
 const LINKS = [
   { href: "/", label: "الرئيسية" },
   { href: "/rules", label: "القوانين" },
-  { href: "/activation", label: "التفعيل" },
   { href: "/store", label: "المتجر" },
 ];
 

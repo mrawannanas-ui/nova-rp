@@ -1,10 +1,9 @@
 // Static data access + helpers (frontend only)
 import products from "@/data/products.json";
 import rules from "@/data/rules.json";
-import codes from "@/data/codes.json";
 import settings from "@/data/settings.json";
 
-export { products, rules, codes, settings };
+export { products, rules, settings };
 
 // Build a wa.me link; normalize Egyptian local (01…) to intl (201…)
 export function whatsappLink(number, message) {

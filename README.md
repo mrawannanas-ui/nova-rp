@@ -8,7 +8,6 @@ src/
   app/            الصفحات (App Router)
     page.js         الرئيسية
     rules/          القوانين
-    activation/     التفعيل
     store/          المتجر (زر الشراء يفتح واتساب)
     layout.js       التخطيط + الخطوط + Navbar/Footer/Fab
     globals.css     التصميم
@@ -16,7 +15,6 @@ src/
   data/           ← البيانات الثابتة (عدّلها هنا)
     products.json   المنتجات
     rules.json      القوانين
-    codes.json      أكواد التفعيل
     settings.json   الإعدادات (رقم/رسالة واتساب، دعوة ديسكورد)
   lib/data.js     قراءة البيانات + دوال مساعدة
 public/logo.svg   اللوجو
@@ -49,5 +47,4 @@ git push -u origin main
 ## المميزات
 - تصميم داكن (كروم + أزرق) متجاوب RTL، خطوط Tajawal + Orbitron.
 - زر الشراء يفتح **واتساب** مباشرة برسالة جاهزة (الرقم في `settings.json`).
-- تفعيل يتحقق من الكود من `codes.json` في المتصفح.
 - زر متجر عائم في كل الصفحات.

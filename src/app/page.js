@@ -11,8 +11,8 @@ export default function Home() {
           <h1>NOVA RP</h1>
           <p className="lead">{settings.heroSubtitle}</p>
           <div className="hero-actions">
-            <Link className="btn btn-primary" href="/activation">🚀 فعّل حسابك الآن</Link>
-            <Link className="btn btn-ghost" href="/store">🛒 تصفّح المتجر</Link>
+            <Link className="btn btn-primary" href="/store">🛒 تصفّح المتجر</Link>
+            <Link className="btn btn-ghost" href="/rules">📜 اقرأ القوانين</Link>
           </div>
         </div>
       </header>
@@ -24,18 +24,12 @@ export default function Home() {
             <h2 className="section-title"><span>استكشف</span> الموقع</h2>
             <p className="section-sub">كل أقسام NOVA RP في مكان واحد — مربوطة ببعضها عبر شريط التنقّل بالأعلى.</p>
           </div>
-          <div className="grid grid-3">
+          <div className="grid grid-2">
             <Link className="card" href="/rules">
               <div className="ico">📜</div>
               <h3>القوانين</h3>
               <p>كل قوانين السيرفر — العامة، الروليبلاي، الوظائف والعصابات. اقرأها قبل ما تبدأ.</p>
               <span className="card-link">اذهب للقوانين ←</span>
-            </Link>
-            <Link className="card" href="/activation">
-              <div className="ico">✅</div>
-              <h3>التفعيل الإلكتروني</h3>
-              <p>سجّل بياناتك وكود التفعيل، والنظام يتحقق من الرقم اللي دخّلته فورًا.</p>
-              <span className="card-link">فعّل حسابك ←</span>
             </Link>
             <Link className="card" href="/store">
               <div className="ico">🛒</div>
@@ -62,9 +56,9 @@ export default function Home() {
         <div className="container">
           <div className="card center" style={{ padding: "48px 24px" }}>
             <h2 className="section-title"><span>جاهز تبدأ؟</span></h2>
-            <p className="section-sub" style={{ margin: "12px auto 24px" }}>فعّل حسابك في أقل من دقيقة وانضم لمجتمع نوفا.</p>
+            <p className="section-sub" style={{ margin: "12px auto 24px" }}>انضم لمجتمع نوفا وابدأ قصتك داخل المدينة.</p>
             <div className="hero-actions">
-              <Link className="btn btn-primary" href="/activation">ابدأ التفعيل</Link>
+              <Link className="btn btn-primary" href="/store">ادخل المتجر</Link>
               <Link className="btn btn-ghost" href="/rules">اقرأ القوانين أولًا</Link>
             </div>
           </div>

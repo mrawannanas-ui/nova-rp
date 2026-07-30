@@ -31,7 +31,7 @@ export default function RulesPage() {
 
           <div className="card center" style={{ marginTop: 30 }}>
             <p style={{ color: "var(--muted)" }}>فهمت القوانين ومستعد تبدأ؟</p>
-            <Link className="btn btn-primary mt" href="/activation">فعّل حسابك الآن ←</Link>
+            <Link className="btn btn-primary mt" href="/store">تصفّح المتجر ←</Link>
           </div>
         </div>
       </main>
