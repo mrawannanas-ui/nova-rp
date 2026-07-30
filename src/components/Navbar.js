@@ -7,8 +7,7 @@ const PAGES = [
   { href: "/", label: "الرئيسية" },
   { href: "/rules", label: "القوانين" },
   { href: "/activation", label: "التفعيل" },
-  { href: "/store", label: "المتجر" },
-  { href: "/admin", label: "لوحة المالك", cta: true },
+  { href: "/store", label: "المتجر", cta: true },
 ];
 
 export default function Navbar() {

@@ -1,25 +1,10 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
-import {
-  products as staticProducts,
-  settings as staticSettings,
-  getProducts,
-  getSettings,
-  whatsappLink,
-  money,
-} from "@/lib/data";
+import { useMemo, useState } from "react";
+import { products, settings, whatsappLink, money } from "@/lib/data";
 
 export default function StorePage() {
-  const [products, setProducts] = useState(staticProducts);
-  const [settings, setSettings] = useState(staticSettings);
   const [activeCat, setActiveCat] = useState("الكل");
   const [query, setQuery] = useState("");
-
-  // overlay any admin edits stored in the browser
-  useEffect(() => {
-    setProducts(getProducts());
-    setSettings(getSettings());
-  }, []);
 
   const categories = useMemo(
     () => ["الكل", ...new Set(products.map((p) => p.category || "أخرى"))],

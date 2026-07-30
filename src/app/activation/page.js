@@ -1,18 +1,13 @@
 "use client";
-import { useEffect, useState } from "react";
-import { codes as staticCodes, getCodes } from "@/lib/data";
+import { useState } from "react";
+import { codes } from "@/lib/data";
 
 export default function ActivationPage() {
-  const [codes, setCodes] = useState(staticCodes);
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const [code, setCode] = useState("");
   const [alert, setAlert] = useState(null); // {msg, ok}
   const [result, setResult] = useState(null); // {name, number, id}
-
-  useEffect(() => {
-    setCodes(getCodes());
-  }, []);
 
   const submit = (e) => {
     e.preventDefault();

@@ -4,8 +4,8 @@ import { usePathname } from "next/navigation";
 
 export default function Fab() {
   const pathname = usePathname();
-  // hide on the store & admin pages
-  if (pathname.startsWith("/store") || pathname.startsWith("/admin")) return null;
+  // hide on the store page
+  if (pathname.startsWith("/store")) return null;
   return (
     <Link className="fab" href="/store" aria-label="المتجر">
       <span className="fab-ico">🛒</span>

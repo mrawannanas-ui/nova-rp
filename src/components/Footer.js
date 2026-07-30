@@ -6,7 +6,6 @@ const LINKS = [
   { href: "/rules", label: "القوانين" },
   { href: "/activation", label: "التفعيل" },
   { href: "/store", label: "المتجر" },
-  { href: "/admin", label: "لوحة المالك" },
 ];
 
 export default function Footer() {
