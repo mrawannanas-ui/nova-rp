@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <defs>
+    <linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.45" stop-color="#cfd8e8"/>
+      <stop offset="0.55" stop-color="#8b96ac"/>
+      <stop offset="1" stop-color="#e9eef6"/>
+    </linearGradient>
+    <linearGradient id="blueEdge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#59c8ff"/>
+      <stop offset="1" stop-color="#2f7bff"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#2f7bff" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#2f7bff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="2.2"/>
+    </filter>
+  </defs>
+  <circle cx="100" cy="100" r="92" fill="url(#glow)"/>
+  <circle cx="100" cy="100" r="80" stroke="url(#blueEdge)" stroke-width="3" opacity="0.9"/>
+  <circle cx="100" cy="100" r="72" stroke="#3b4a63" stroke-width="1" opacity="0.6"/>
+  <g filter="url(#soft)">
+    <path d="M63 140 V60 h16 l42 52 V60 h16 v80 h-16 l-42-52 v52 z"
+          fill="url(#chrome)" stroke="url(#blueEdge)" stroke-width="1.5"/>
+  </g>
+  <g transform="translate(100 46)">
+    <path d="M0 -20 L4 -4 L20 0 L4 4 L0 20 L-4 4 L-20 0 L-4 -4 Z" fill="url(#blueEdge)"/>
+    <path d="M0 -11 L2 -2 L11 0 L2 2 L0 11 L-2 2 L-11 0 L-2 -2 Z" fill="#ffffff"/>
+  </g>
+</svg>
