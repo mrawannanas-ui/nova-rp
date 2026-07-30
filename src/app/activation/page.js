@@ -68,7 +68,7 @@ export default function ActivationPage() {
                   <input className="input mono" value={code}
                     onChange={(e) => setCode(e.target.value.toUpperCase())}
                     placeholder="NOVA-XXXX-XXXX" style={{ letterSpacing: "2px" }} autoComplete="off" />
-                  <div className="hint">تحصل على الكود من إدارة السيرفر. للتجربة: <code className="tag">NOVA-DEMO-2026</code></div>
+                  <div className="hint">تحصل على الكود من إدارة السيرفر.</div>
                 </div>
                 <button className="btn btn-primary btn-block" type="submit">تحقّق وفعّل</button>
               </>

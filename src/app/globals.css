@@ -227,10 +227,6 @@ textarea.input{resize:vertical;min-height:90px}
   border:1px solid var(--border);font-size:.96rem}
 .rule-list li::before{content:"◆";color:var(--cyan);font-size:.7rem;margin-top:7px}
 
-/* ---- INLINE CODE TAG ---- */
-code.tag{font-family:ui-monospace,monospace;background:#0a1120;padding:4px 10px;border-radius:8px;
-  border:1px solid var(--border);color:var(--cyan)}
-
 /* ---- FAB (floating store button) ---- */
 .fab{position:fixed;bottom:22px;left:22px;z-index:90;display:inline-flex;align-items:center;gap:9px;
   padding:14px 20px;border-radius:999px;font-weight:800;font-size:.95rem;color:#fff;
