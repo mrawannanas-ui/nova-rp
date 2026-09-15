@@ -2,7 +2,6 @@ import "./globals.css";
 import { Tajawal, Orbitron } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import Fab from "@/components/Fab";
 
 const tajawal = Tajawal({
   subsets: ["arabic", "latin"],
@@ -19,7 +18,7 @@ const orbitron = Orbitron({
 
 export const metadata = {
   title: "NOVA RP — روليبلاي",
-  description: "أقوى تجربة روليبلاي عربية — قوانين، تفعيل، ومتجر.",
+  description: "أقوى تجربة روليبلاي عربية — قوانين السيرفر ونظام التفعيل.",
   icons: { icon: "/NOVA-LOGO.png" },
 };
 
@@ -29,7 +28,6 @@ export default function RootLayout({ children }) {
       <body>
         <Navbar />
         {children}
-        <Fab />
         <Footer />
       </body>
     </html>

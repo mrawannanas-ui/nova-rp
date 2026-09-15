@@ -4,7 +4,7 @@ import { settings } from "@/lib/data";
 const LINKS = [
   { href: "/", label: "الرئيسية" },
   { href: "/rules", label: "القوانين" },
-  { href: "/store", label: "المتجر" },
+  { href: "/verify", label: "التفعيل" },
 ];
 
 export default function Footer() {

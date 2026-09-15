@@ -11,7 +11,7 @@ export default function Home() {
           <h1>NOVA RP</h1>
           <p className="lead">{settings.heroSubtitle}</p>
           <div className="hero-actions">
-            <Link className="btn btn-primary" href="/store">🛒 تصفّح المتجر</Link>
+            <Link className="btn btn-primary" href="/verify">✅ فعّل حسابك</Link>
             <Link className="btn btn-ghost" href="/rules">📜 اقرأ القوانين</Link>
           </div>
         </div>
@@ -31,11 +31,11 @@ export default function Home() {
               <p>كل قوانين السيرفر — العامة، الروليبلاي، الوظائف والعصابات. اقرأها قبل ما تبدأ.</p>
               <span className="card-link">اذهب للقوانين ←</span>
             </Link>
-            <Link className="card" href="/store">
-              <div className="ico">🛒</div>
-              <h3>المتجر</h3>
-              <p>رتب VIP، عملات، سيارات وأكثر. تصفية حسب القسم وبحث سريع.</p>
-              <span className="card-link">افتح المتجر ←</span>
+            <Link className="card" href="/verify">
+              <div className="ico">✅</div>
+              <h3>التفعيل</h3>
+              <p>فعّل حسابك بالديسكورد في خطوات بسيطة علشان تظهرلك كل الرومات والقنوات.</p>
+              <span className="card-link">ابدأ التفعيل ←</span>
             </Link>
           </div>
         </div>
@@ -58,7 +58,7 @@ export default function Home() {
             <h2 className="section-title"><span>جاهز تبدأ؟</span></h2>
             <p className="section-sub" style={{ margin: "12px auto 24px" }}>انضم لمجتمع نوفا وابدأ قصتك داخل المدينة.</p>
             <div className="hero-actions">
-              <Link className="btn btn-primary" href="/store">ادخل المتجر</Link>
+              <Link className="btn btn-primary" href="/verify">فعّل حسابك الآن</Link>
               <Link className="btn btn-ghost" href="/rules">اقرأ القوانين أولًا</Link>
             </div>
           </div>

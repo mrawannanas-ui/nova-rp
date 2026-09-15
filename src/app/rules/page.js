@@ -31,10 +31,7 @@ export default function RulesPage() {
 
           <div className="card center" style={{ marginTop: 30 }}>
             <p style={{ color: "var(--muted)" }}>فهمت القوانين ومستعد تبدأ؟ فعّل حسابك علشان تظهرلك كل الرومات.</p>
-            <div className="hero-actions mt">
-              <Link className="btn btn-primary" href="/verify">فعّل حسابك الآن ←</Link>
-              <Link className="btn btn-ghost" href="/store">تصفّح المتجر</Link>
-            </div>
+            <Link className="btn btn-primary mt" href="/verify">فعّل حسابك الآن ←</Link>
           </div>
         </div>
       </main>

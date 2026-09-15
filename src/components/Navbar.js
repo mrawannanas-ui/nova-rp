@@ -6,9 +6,7 @@ import { usePathname } from "next/navigation";
 const PAGES = [
   { href: "/", label: "الرئيسية" },
   { href: "/rules", label: "القوانين" },
-  { href: "/verify", label: "التفعيل" },
-  { href: "/store", label: "المتجر", cta: true },
-  { href: "/admin", label: "الإدارة" },
+  { href: "/verify", label: "التفعيل", cta: true },
 ];
 
 export default function Navbar() {

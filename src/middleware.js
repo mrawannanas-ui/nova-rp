@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-const adminPaths = ["/admin", "/api/products", "/api/upload", "/api/verify/log"];
+const adminPaths = ["/admin", "/api/verify/log"];
 
 export function middleware(request) {
   const { pathname, hostname } = request.nextUrl;
@@ -24,5 +24,5 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/api/products/:path*", "/api/upload/:path*", "/api/verify/log/:path*"],
+  matcher: ["/admin/:path*", "/api/verify/log/:path*"],
 };

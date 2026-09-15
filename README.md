@@ -1,59 +1,52 @@
 # NOVA RP — Next.js
 
-موقع **NOVA RP** باستخدام **Next.js (App Router)**، مع متجر وBackend وNova Country Admin Panel محمية.
+موقع **NOVA RP** باستخدام **Next.js (App Router)** — قوانين السيرفر ونظام تفعيل بالديسكورد.
 
 ## البنية
 ```
 src/
-  app/            الصفحات (App Router)
-    page.js         الرئيسية
-    rules/          القوانين
-    store/          المتجر (زر الشراء يفتح واتساب)
-    layout.js       التخطيط + الخطوط + Navbar/Footer/Fab
-    globals.css     التصميم
-  components/      Navbar / Footer / Fab
-  data/           ← البيانات الثابتة (عدّلها هنا)
-    products.json   المنتجات
-    rules.json      القوانين
-    settings.json   الإعدادات (رقم/رسالة واتساب، دعوة ديسكورد)
-  lib/data.js     قراءة البيانات + دوال مساعدة
-public/logo.svg   اللوجو
+  app/
+    page.js           الرئيسية
+    rules/            القوانين
+    verify/           صفحة التفعيل (القوانين + الكابتشا)
+    admin/            سجل التفعيلات (محمي)
+    api/verify/       مسارات التفعيل
+    layout.js         التخطيط + الخطوط + Navbar/Footer
+    globals.css       التصميم
+  components/         Navbar / Footer
+  data/             ← البيانات الثابتة (عدّلها هنا)
+    rules.json        القوانين
+    settings.json     الإعدادات (دعوة ديسكورد، نص الهيرو)
+  lib/
+    data.js           قراءة البيانات
+    discord.js        OAuth + إعطاء الرتبة
+    security.js       الكابتشا + Rate limit + عمر الحساب
+    verifylog.js      السجل + الحظر + Webhook
+public/NOVA-LOGO.png  اللوجو
 ```
 
 ## تعديل المحتوى
-كل البيانات في `src/data/*.json` — عدّلها مباشرة وارفع التغيير (git push) فيعيد Vercel النشر تلقائيًا.
+القوانين والإعدادات في `src/data/*.json` — عدّلها وارفع التغيير (git push) فيعيد Vercel النشر تلقائيًا.
 
-> ملاحظة أمان: بما أن الموقع static، فأي شيء في ملفات JSON مرئي في كود الصفحة — لا تضع فيها أسرارًا.
+> ملاحظة أمان: محتوى ملفات JSON مرئي للجميع — لا تضع فيها أسرارًا. الأسرار كلها في Environment Variables.
 
-## التشغيل محليًا (يتطلب Node.js)
+## التشغيل محليًا
 ```bash
 npm install
-npm run dev      # http://localhost:3000
-npm run build    # ينتج مجلد /out ثابت
+cp .env.example .env.local   # واملأ القيم
+npm run dev                  # http://localhost:3000
+npm run build
 ```
 
-## النشر على Render
-يوجد ملف `render.yaml` جاهز كـ Node Web Service.
+## النشر
+المشروع مربوط بـ **Vercel** عبر GitHub — أي `git push` على `main` بيعمل نشر تلقائي.
+يوجد أيضًا `render.yaml` جاهز لو حبيت تنشر على Render.
 
-1. افتح Render واختر **New → Blueprint**.
-2. اربط مستودع GitHub ثم اختر هذا المشروع.
-3. أضف قيم `ADMIN_DOMAIN`, `ADMIN_USERNAME`, `ADMIN_PASSWORD`, `ADMIN_SESSION_SECRET` و`PAYMOB_API_KEY` في Environment.
-4. اجعل `ADMIN_DOMAIN` هو دومين لوحة الإدارة، ثم أضفه أيضًا كـ Custom Domain داخل Render.
-
-قيمة `ADMIN_SESSION_SECRET` الموجودة في `.env.example` هي قيمة إعداد افتراضية فقط. غيّرها في Render إلى قيمة عشوائية طويلة قبل النشر العام.
-
-> ملاحظة: تخزين المنتجات في JSON مناسب للتجربة، لكن Render لا يضمن بقاء الملفات على القرص في كل إعادة تشغيل. للإنتاج استخدم قاعدة بيانات أو قرص Render دائم.
-
-### رفع المشروع على GitHub
-```bash
-# أنشئ Repo فاضي على github.com باسم nova-rp، ثم:
-git remote add origin https://github.com/<username>/nova-rp.git
-git push -u origin main
-```
+> كل المتغيرات في `.env.example` لازم تتحط في **Vercel → Settings → Environment Variables**، مش في الكود.
 
 ## نظام التفعيل بالديسكورد (`/verify`)
 
-صفحة تحقق من 3 خطوات: دخول بالديسكورد → تأكيد → إعطاء رتبة التفعيل تلقائيًا فتظهر باقي الرومات للاعب.
+صفحة تحقق: دخول بالديسكورد → قراءة القوانين والموافقة → كابتشا → إعطاء رتبة التفعيل تلقائيًا فتظهر باقي الرومات للاعب.
 
 ### 1) إنشاء تطبيق ديسكورد
 1. ادخل [Discord Developer Portal](https://discord.com/developers/applications) → **New Application** باسم `NOVA RP`.
@@ -116,7 +109,7 @@ git push -u origin main
 > لو سِبت مفاتيح Turnstile فاضية، الصفحة بترجع تلقائياً لمربع «أنا لست روبوت» العادي.
 
 ### سجل التفعيلات
-متاح للإدارة على `/admin/verifications` — إحصائيات + بحث + سبب رفض كل محاولة.
+متاح للإدارة على `/admin` — إحصائيات + بحث + سبب رفض كل محاولة.
 
 > ⚠️ على Vercel وRender (الخطة المجانية) نظام الملفات مؤقت، فملف `verifications.json` **مش هيفضل** بعد كل نشر.
 > علشان سجل دائم استخدم `DISCORD_LOG_WEBHOOK` — ده اللي هيوصلك كل محاولة لحظياً في روم خاص بالإدارة.
@@ -127,5 +120,6 @@ git push -u origin main
 
 ## المميزات
 - تصميم داكن (كروم + أزرق) متجاوب RTL، خطوط Tajawal + Orbitron.
-- زر الشراء يفتح **واتساب** مباشرة برسالة جاهزة (الرقم في `settings.json`).
-- زر متجر عائم في كل الصفحات.
+- تفعيل تلقائي بالديسكورد مع إعطاء الرتبة مباشرة.
+- القوانين مدموجة داخل خطوات التفعيل — إجبارية قبل الموافقة.
+- لوحة إدارة محمية لمتابعة كل محاولات التفعيل.

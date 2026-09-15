@@ -17,8 +17,6 @@ services:
         sync: false
       - key: ADMIN_SESSION_SECRET
         sync: false
-      - key: PAYMOB_API_KEY
-        sync: false
       - key: DISCORD_CLIENT_ID
         sync: false
       - key: DISCORD_CLIENT_SECRET
