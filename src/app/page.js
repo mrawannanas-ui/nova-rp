@@ -6,7 +6,7 @@ export default function Home() {
     <>
       <header className="hero">
         <div className="container">
-          <img className="hero-logo" src="/logo.svg" alt="NOVA RP" />
+          <img className="hero-logo" src="/NOVA-LOGO.png" alt="NOVA RP" />
           <div className="tag">R O L E P L A Y</div>
           <h1>NOVA RP</h1>
           <p className="lead">{settings.heroSubtitle}</p>

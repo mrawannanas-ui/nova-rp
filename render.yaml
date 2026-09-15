@@ -1,0 +1,47 @@
+services:
+  - type: web
+    name: nova-country
+    runtime: node
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: ADMIN_DOMAIN
+        sync: false
+      - key: ADMIN_USERNAME
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: ADMIN_SESSION_SECRET
+        sync: false
+      - key: PAYMOB_API_KEY
+        sync: false
+      - key: DISCORD_CLIENT_ID
+        sync: false
+      - key: DISCORD_CLIENT_SECRET
+        sync: false
+      - key: DISCORD_BOT_TOKEN
+        sync: false
+      - key: DISCORD_GUILD_ID
+        sync: false
+      - key: DISCORD_VERIFIED_ROLE_ID
+        sync: false
+      - key: DISCORD_REDIRECT_URI
+        sync: false
+      - key: VERIFY_SESSION_SECRET
+        sync: false
+      - key: NEXT_PUBLIC_DISCORD_INVITE
+        sync: false
+      - key: NEXT_PUBLIC_TURNSTILE_SITE_KEY
+        sync: false
+      - key: TURNSTILE_SECRET_KEY
+        sync: false
+      - key: VERIFY_MIN_ACCOUNT_AGE_DAYS
+        sync: false
+      - key: VERIFY_BLOCKED_IDS
+        sync: false
+      - key: DISCORD_LOG_WEBHOOK
+        sync: false

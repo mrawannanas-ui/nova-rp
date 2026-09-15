@@ -6,7 +6,9 @@ import { usePathname } from "next/navigation";
 const PAGES = [
   { href: "/", label: "الرئيسية" },
   { href: "/rules", label: "القوانين" },
+  { href: "/verify", label: "التفعيل" },
   { href: "/store", label: "المتجر", cta: true },
+  { href: "/admin", label: "الإدارة" },
 ];
 
 export default function Navbar() {
@@ -28,7 +30,7 @@ export default function Navbar() {
     <nav className={"nav" + (scrolled ? " scrolled" : "")}>
       <div className="container">
         <Link className="brand" href="/">
-          <img className="logo" src="/logo.svg" alt="NOVA RP" />
+          <img className="logo" src="/NOVA-LOGO.png" alt="NOVA RP" />
           <span className="brand-text">
             <b>NOVA</b>
             <small>ROLEPLAY</small>

@@ -1,18 +1,28 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { products, settings, whatsappLink, money } from "@/lib/data";
 
 export default function StorePage() {
+  const [catalog, setCatalog] = useState(products);
   const [activeCat, setActiveCat] = useState("الكل");
   const [query, setQuery] = useState("");
+  const [paying, setPaying] = useState(null);
+  const [paymentError, setPaymentError] = useState("");
+
+  useEffect(() => {
+    fetch("/api/products")
+      .then((response) => response.ok ? response.json() : products)
+      .then((data) => setCatalog(Array.isArray(data) ? data : products))
+      .catch(() => setCatalog(products));
+  }, []);
 
   const categories = useMemo(
-    () => ["الكل", ...new Set(products.map((p) => p.category || "أخرى"))],
-    [products]
+    () => ["الكل", ...new Set(catalog.map((p) => p.category || "أخرى"))],
+    [catalog]
   );
 
   const list = useMemo(() => {
-    let l = products.slice();
+    let l = catalog.slice();
     if (activeCat !== "الكل") l = l.filter((p) => (p.category || "أخرى") === activeCat);
     const q = query.trim().toLowerCase();
     if (q)
@@ -22,10 +32,25 @@ export default function StorePage() {
           (p.description || "").toLowerCase().includes(q)
       );
     return l;
-  }, [products, activeCat, query]);
+  }, [catalog, activeCat, query]);
 
-  const buy = () =>
-    window.open(whatsappLink(settings.whatsappNumber, settings.whatsappMessage), "_blank");
+  const buy = async (product) => {
+    setPaying(product.id);
+    setPaymentError("");
+    try {
+      const response = await fetch("/api/paymob/payment", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(product) });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error);
+      const message = `${settings.whatsappMessage}\n\nPaymob Order ID: ${result.orderId}\nالمنتج: ${product.name}`;
+      window.open(whatsappLink(settings.whatsappNumber, message), "_blank");
+      setPaymentError(`تم إنشاء طلب الدفع رقم ${result.orderId}.`);
+    } catch (error) {
+      setPaymentError(error.message || "تعذر بدء الدفع");
+      window.open(whatsappLink(settings.whatsappNumber, settings.whatsappMessage), "_blank");
+    } finally {
+      setPaying(null);
+    }
+  };
 
   return (
     <>
@@ -61,6 +86,7 @@ export default function StorePage() {
               />
             </div>
           </div>
+          {paymentError && <div className="admin-message payment-message">{paymentError} تم فتح واتساب للتواصل مع الإدارة.</div>}
 
           {list.length === 0 ? (
             <div className="empty"><div className="big">📦</div><p>لا توجد منتجات مطابقة.</p></div>
@@ -68,13 +94,15 @@ export default function StorePage() {
             <div className="grid grid-3">
               {list.map((p) => (
                 <div className="card product" key={p.id}>
-                  <div className="thumb">{p.icon || "🛒"}</div>
+                  <div className="thumb">
+                    {p.image ? <img src={p.image} alt="" /> : (p.icon || "🛒")}
+                  </div>
                   <span className="cat">{p.category || "أخرى"}</span>
                   <h3>{p.name}</h3>
                   <p className="desc">{p.description || ""}</p>
                   <div className="foot">
                     <span className="price">${money(p.price)} <small>USD</small></span>
-                    <button className="btn btn-primary btn-sm" onClick={buy}>شراء</button>
+                    <button className="btn btn-primary btn-sm" onClick={() => buy(p)} disabled={paying === p.id}>{paying === p.id ? "جارٍ التحويل..." : "شراء"}</button>
                   </div>
                 </div>
               ))}

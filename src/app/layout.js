@@ -20,7 +20,7 @@ const orbitron = Orbitron({
 export const metadata = {
   title: "NOVA RP — روليبلاي",
   description: "أقوى تجربة روليبلاي عربية — قوانين، تفعيل، ومتجر.",
-  icons: { icon: "/logo.svg" },
+  icons: { icon: "/NOVA-LOGO.png" },
 };
 
 export default function RootLayout({ children }) {

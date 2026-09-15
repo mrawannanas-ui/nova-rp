@@ -10,3 +10,6 @@
 *.log
 .env*
 .vercel
+
+# verification log — contains player IPs, never commit to a public repo
+/src/data/verifications.json
