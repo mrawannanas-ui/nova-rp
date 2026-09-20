@@ -1,4 +1,5 @@
 /** Shared security helpers for the verification flow. */
+import { verifyConfig } from "@/lib/config";
 
 /** Best-effort client IP from proxy headers (Render/Vercel/Cloudflare). */
 export function clientIp(request) {
@@ -76,7 +77,7 @@ export function snowflakeDate(id) {
 
 /** Rejects freshly-made alt accounts. 0 disables the check. */
 export function checkAccountAge(userId) {
-  const minDays = Number(process.env.VERIFY_MIN_ACCOUNT_AGE_DAYS || 0);
+  const minDays = verifyConfig.minAccountAgeDays;
   if (!minDays) return { ok: true };
 
   const created = snowflakeDate(userId);

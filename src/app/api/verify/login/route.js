@@ -6,7 +6,8 @@ import { clientIp, rateLimit } from "@/lib/security";
 export const dynamic = "force-dynamic";
 
 export async function GET(request) {
-  if (!process.env.DISCORD_CLIENT_ID || !process.env.DISCORD_CLIENT_SECRET) {
+  // Only the secret can be missing now — the client id is baked into config.
+  if (!process.env.DISCORD_CLIENT_SECRET) {
     return NextResponse.redirect(new URL("/verify?error=config", request.url));
   }
 

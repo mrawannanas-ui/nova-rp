@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { verifyConfig } from "@/lib/config";
 
 const LOG_PATH = path.join(process.cwd(), "src", "data", "verifications.json");
 const MAX_RECORDS = 1000;
@@ -40,11 +41,7 @@ export function recordVerification(entry) {
 
 /** User IDs that may never verify. Comma-separated env var. */
 export function isBlocked(userId) {
-  const list = (process.env.VERIFY_BLOCKED_IDS || "")
-    .split(",")
-    .map((s) => s.trim())
-    .filter(Boolean);
-  return list.includes(String(userId));
+  return verifyConfig.blockedIds.includes(String(userId));
 }
 
 /** Fire-and-forget audit embed to a Discord webhook. */

@@ -1,4 +1,5 @@
 import crypto from "crypto";
+import { discordConfig } from "@/lib/config";
 
 export const verifyCookieName = "nova_verify_session";
 export const stateCookieName = "nova_verify_state";
@@ -56,20 +57,17 @@ export function cookieOptions(maxAge) {
 }
 
 export function redirectUri(request) {
-  if (process.env.DISCORD_REDIRECT_URI) return process.env.DISCORD_REDIRECT_URI;
-  const url = new URL("/api/verify/callback", request.url);
-  const forwardedHost = request.headers.get("x-forwarded-host");
-  const forwardedProto = request.headers.get("x-forwarded-proto");
-  if (forwardedHost) {
-    url.host = forwardedHost;
-    url.protocol = `${forwardedProto || "https"}:`;
+  // Localhost always self-resolves so `npm run dev` works without extra setup.
+  const host = request.headers.get("x-forwarded-host") || new URL(request.url).host;
+  if (host.startsWith("localhost") || host.startsWith("127.0.0.1")) {
+    return new URL("/api/verify/callback", request.url).toString();
   }
-  return url.toString();
+  return discordConfig.redirectUri;
 }
 
 export function authorizeUrl({ state, redirect }) {
   const params = new URLSearchParams({
-    client_id: process.env.DISCORD_CLIENT_ID || "",
+    client_id: discordConfig.clientId,
     redirect_uri: redirect,
     response_type: "code",
     scope: "identify guilds.join",
@@ -84,7 +82,7 @@ export async function exchangeCode({ code, redirect }) {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams({
-      client_id: process.env.DISCORD_CLIENT_ID || "",
+      client_id: discordConfig.clientId,
       client_secret: process.env.DISCORD_CLIENT_SECRET || "",
       grant_type: "authorization_code",
       code,
@@ -105,8 +103,7 @@ export async function fetchDiscordUser(accessToken) {
 
 /** Adds the member to the guild if missing, then assigns the verified role. */
 export async function grantVerifiedRole({ userId, accessToken }) {
-  const guildId = process.env.DISCORD_GUILD_ID;
-  const roleId = process.env.DISCORD_VERIFIED_ROLE_ID;
+  const { guildId, verifiedRoleId: roleId } = discordConfig;
   const botToken = process.env.DISCORD_BOT_TOKEN;
 
   if (!guildId || !roleId || !botToken) {
